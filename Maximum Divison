@@ -1,24 +1,47 @@
 import java.util.*;
 
 public class Main {
+
+    public static int birthday(List<Integer> s, int d, int m) {
+        int count = 0;
+        int sum = 0;
+
+        // First window
+        for (int i = 0; i < m; i++) {
+            sum += s.get(i);
+        }
+
+        if (sum == d) {
+            count++;
+        }
+
+        // Slide the window
+        for (int i = m; i < s.size(); i++) {
+            sum += s.get(i);
+            sum -= s.get(i - m);
+
+            if (sum == d) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] nums = new int[n];
+
+        List<Integer> s = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
+            s.add(sc.nextInt());
         }
 
-        int currentSum = nums[0];
-        int maxSum = nums[0];
+        int d = sc.nextInt();
+        int m = sc.nextInt();
 
-        for (int i = 1; i < n; i++) {
-            currentSum = Math.max(nums[i], currentSum + nums[i]);
-            maxSum = Math.max(maxSum, currentSum);
-        }
-
-        System.out.println(maxSum);
+        System.out.println(birthday(s, d, m));
     }
 }
