@@ -1,39 +1,38 @@
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-
-        int[] a = new int[3];
-        int[] b = new int[3];
-
-        // Input Alice's ratings
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
-        }
-
-        // Input Bob's ratings
-        for (int i = 0; i < 3; i++) {
-            b[i] = sc.nextInt();
-        }
-
+    public static List<Integer> compareTriplets(List<Integer> a, List<Integer> b) {
         int alice = 0;
         int bob = 0;
 
-        // Compare ratings
         for (int i = 0; i < 3; i++) {
-
-            if (a[i] > b[i]) {
+            if (a.get(i) > b.get(i)) {
                 alice++;
-            }
-            else if (a[i] < b[i]) {
+            } else if (a.get(i) < b.get(i)) {
                 bob++;
             }
         }
 
-        System.out.println(alice + " " + bob);
+        return Arrays.asList(alice, bob);
+    }
 
-        sc.close();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        List<Integer> a = new ArrayList<>();
+        List<Integer> b = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            a.add(sc.nextInt());
+        }
+
+        for (int i = 0; i < 3; i++) {
+            b.add(sc.nextInt());
+        }
+
+        List<Integer> result = compareTriplets(a, b);
+
+        System.out.println(result.get(0) + " " + result.get(1));
     }
 }
