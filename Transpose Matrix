@@ -1,33 +1,16 @@
-import java.util.*;
+class Solution {
+    public int[][] transpose(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int m = sc.nextInt(); // rows
-        int n = sc.nextInt(); // columns
-
-        int[][] matrix = new int[m][n];
-
-        // Read matrix
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                matrix[i][j] = sc.nextInt();
-            }
-        }
-
-        // Transpose: n rows, m columns
-        int[][] transpose = new int[n][m];
+        int[][] result = new int[n][m];
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                transpose[j][i] = matrix[i][j];
+                result[j][i] = matrix[i][j];
             }
         }
 
-        // Print transpose
-        for (int i = 0; i < n; i++) {
-            System.out.println(Arrays.toString(transpose[i]));
-        }
+        return result;
     }
 }
