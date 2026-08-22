@@ -1,13 +1,10 @@
-import java.util.*;
-
-public class Main {
-
-    public static int myAtoi(String s) {
+class Solution {
+    public int myAtoi(String s) {
 
         int i = 0;
         int n = s.length();
 
-        // 1. Skip leading whitespace
+        // 1. Skip leading spaces
         while (i < n && s.charAt(i) == ' ') {
             i++;
         }
@@ -22,14 +19,14 @@ public class Main {
             i++;
         }
 
-        // 3. Convert digits
+        // 3. Read digits
         int result = 0;
 
         while (i < n && Character.isDigit(s.charAt(i))) {
 
             int digit = s.charAt(i) - '0';
 
-            // 4. Check for overflow before adding digit
+            // 4. Check overflow before adding digit
             if (result > (Integer.MAX_VALUE - digit) / 10) {
                 if (sign == 1) {
                     return Integer.MAX_VALUE;
@@ -43,13 +40,5 @@ public class Main {
         }
 
         return result * sign;
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        String s = sc.nextLine();
-
-        System.out.println(myAtoi(s));
     }
 }
