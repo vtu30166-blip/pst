@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[][] arr = new int[n][n];
+
+        // Read the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        int primary = 0;
+        int secondary = 0;
+
+        // Calculate diagonal sums
+        for (int i = 0; i < n; i++) {
+            primary += arr[i][i];
+            secondary += arr[i][n - 1 - i];
+        }
+
+        // Absolute difference
+        int difference = Math.abs(primary - secondary);
+
+        System.out.println(difference);
+    }
+}
