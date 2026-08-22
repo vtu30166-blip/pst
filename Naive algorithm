@@ -2,32 +2,24 @@ import java.util.*;
 
 public class Main {
 
-    public static ArrayList<Integer> search(String text, String pattern) {
-
-        ArrayList<Integer> result = new ArrayList<>();
-
+    public static void search(String text, String pattern) {
         int n = text.length();
         int m = pattern.length();
 
-        // Try every possible starting position
         for (int i = 0; i <= n - m; i++) {
 
-            int j;
+            int j = 0;
 
-            // Compare pattern with text starting at i
-            for (j = 0; j < m; j++) {
-                if (text.charAt(i + j) != pattern.charAt(j)) {
-                    break;
-                }
+            // Compare pattern with text starting at index i
+            while (j < m && text.charAt(i + j) == pattern.charAt(j)) {
+                j++;
             }
 
-            // If all characters matched
+            // If entire pattern matched
             if (j == m) {
-                result.add(i);
+                System.out.print(i + " ");
             }
         }
-
-        return result;
     }
 
     public static void main(String[] args) {
@@ -36,8 +28,8 @@ public class Main {
         String text = sc.nextLine();
         String pattern = sc.nextLine();
 
-        ArrayList<Integer> result = search(text, pattern);
+        search(text, pattern);
 
-        System.out.println(result);
+        sc.close();
     }
 }
