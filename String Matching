@@ -1,24 +1,12 @@
 import java.util.*;
 
-public class Main {
+class Solution {
+    public List<String> stringMatching(String[] words) {
+        List<String> result = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < words.length; i++) {
+            for (int j = 0; j < words.length; j++) {
 
-        int n = sc.nextInt();
-        String[] words = new String[n];
-
-        for (int i = 0; i < n; i++) {
-            words[i] = sc.next();
-        }
-
-        ArrayList<String> result = new ArrayList<>();
-
-        for (int i = 0; i < n; i++) {
-
-            for (int j = 0; j < n; j++) {
-
-                // Don't compare the word with itself
                 if (i != j && words[j].contains(words[i])) {
                     result.add(words[i]);
                     break;
@@ -26,6 +14,6 @@ public class Main {
             }
         }
 
-        System.out.println(result);
+        return result;
     }
 }
