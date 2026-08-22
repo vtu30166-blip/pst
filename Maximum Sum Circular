@@ -1,32 +1,25 @@
-import java.util.*;
-
-public class Main {
-
-    public static int maxSubarraySumCircular(int[] nums) {
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
 
         int totalSum = 0;
 
-        // For maximum subarray
-        int currentMax = nums[0];
+        int currentMax = 0;
         int maxSum = nums[0];
 
-        // For minimum subarray
-        int currentMin = nums[0];
+        int currentMin = 0;
         int minSum = nums[0];
 
-        for (int i = 0; i < nums.length; i++) {
+        for (int num : nums) {
 
-            totalSum += nums[i];
+            // Maximum subarray sum
+            currentMax = Math.max(num, currentMax + num);
+            maxSum = Math.max(maxSum, currentMax);
 
-            if (i > 0) {
-                // Maximum subarray (Kadane)
-                currentMax = Math.max(nums[i], currentMax + nums[i]);
-                maxSum = Math.max(maxSum, currentMax);
+            // Minimum subarray sum
+            currentMin = Math.min(num, currentMin + num);
+            minSum = Math.min(minSum, currentMin);
 
-                // Minimum subarray
-                currentMin = Math.min(nums[i], currentMin + nums[i]);
-                minSum = Math.min(minSum, currentMin);
-            }
+            totalSum += num;
         }
 
         // If all numbers are negative
@@ -34,23 +27,8 @@ public class Main {
             return maxSum;
         }
 
-        // Maximum of normal subarray and circular subarray
-        int circularSum = totalSum - minSum;
-
-        return Math.max(maxSum, circularSum);
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-
-        int[] nums = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
-        }
-
-        System.out.println(maxSubarraySumCircular(nums));
+        // Normal maximum OR circular maximum
+        return Math.max(maxSum, totalSum - minSum);
     }
 }
+
