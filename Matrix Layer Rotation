@@ -10,7 +10,7 @@ public class Main {
 
         for (int layer = 0; layer < layers; layer++) {
 
-            ArrayList<Integer> elements = new ArrayList<>();
+            ArrayList<Integer> list = new ArrayList<>();
 
             int top = layer;
             int left = layer;
@@ -19,61 +19,52 @@ public class Main {
 
             // Top row: left -> right
             for (int j = left; j <= right; j++) {
-                elements.add(matrix[top][j]);
+                list.add(matrix[top][j]);
             }
 
             // Right column: top+1 -> bottom
             for (int i = top + 1; i <= bottom; i++) {
-                elements.add(matrix[i][right]);
+                list.add(matrix[i][right]);
             }
 
             // Bottom row: right-1 -> left
             for (int j = right - 1; j >= left; j--) {
-                elements.add(matrix[bottom][j]);
+                list.add(matrix[bottom][j]);
             }
 
             // Left column: bottom-1 -> top+1
             for (int i = bottom - 1; i > top; i--) {
-                elements.add(matrix[i][left]);
+                list.add(matrix[i][left]);
             }
 
-            int size = elements.size();
-            int shift = r % size;
+            int len = list.size();
+            int rotation = r % len;
 
-            // Anti-clockwise rotation means shifting elements
-            // to the left by 'shift' positions.
-            ArrayList<Integer> rotated = new ArrayList<>();
-
-            for (int i = shift; i < size; i++) {
-                rotated.add(elements.get(i));
-            }
-
-            for (int i = 0; i < shift; i++) {
-                rotated.add(elements.get(i));
-            }
-
-            int index = 0;
-
-            // Put values back into the layer
+            // Put rotated values back
+            int index = rotation;
 
             // Top row
             for (int j = left; j <= right; j++) {
-                matrix[top][j] = rotated.get(index++);
+                matrix[top][j] = list.get(index);
+                index = (index + 1) % len;
             }
 
             // Right column
             for (int i = top + 1; i <= bottom; i++) {
-                matrix[i][right] = rotated.get(index++);
+                matrix[i][right] = list.get(index);
+                index = (index + 1) % len;
             }
 
             // Bottom row
             for (int j = right - 1; j >= left; j--) {
-                matrix[bottom][j] = rotated.get(index++);
+                matrix[bottom][j] = list.get(index);
+                index = (index + 1) % len;
             }
 
             // Left column
             for (int i = bottom - 1; i > top; i--) {
-                matrix[i][left] = rotated.get(index++);
+                matrix[i][left] = list.get(index);
+                index = (index + 1) % len;
             }
         }
 
